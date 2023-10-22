@@ -2,6 +2,7 @@
 #include <elf.h>
 #include <filesystem>
 #include <fstream>
+#include <ios>
 #include <iostream>
 #include <string>
 
@@ -37,7 +38,9 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   }
 
-  // TODO: Overwrite section headers and shstrtab
+  Elf64_Ehdr *ehdr = reinterpret_cast<Elf64_Ehdr *>(&file_data[0]);
+  std::cout << std::hex;
+  std::cout << "Entrypoint: 0x" << ehdr->e_entry << std::endl;
 
   return 0;
 }
